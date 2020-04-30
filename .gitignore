@@ -9,4 +9,6 @@ __pycache__
 log.txt
 **/log.txt
 
+.vscode
+
 dest
