@@ -8,9 +8,9 @@ def check_cell(cell1, cell2):
     """
     Check one cell of completed student book (cell2) with original ones (cell1)
     Return an int number as result: 
-        0 = failed, i.e. empty or not run with error
+        0 = failed, i.e. empty or error(s) in output
         1 = worked, i.e. not empty and run without error
-        2 = same, i.e. output same as in textbook
+        2 = correct, i.e. output same as in the textbook
     """
     # no source code
     if len(cell2['source']) == 0:
@@ -20,7 +20,7 @@ def check_cell(cell1, cell2):
     if cell2['source'] == const.SOURCE_PH:
         return 0
 
-    # if outputs is empty, we have two different possibility
+    # if outputs is empty, there are two cases
     if len(cell2['outputs']) == 0:
         # code not run: if outputs in textbook is not empty, or
         # cannot determined: if outputs in textbook is also empty, 
@@ -30,7 +30,7 @@ def check_cell(cell1, cell2):
         else:
             return 2
 
-    # the normal case, not empty source and outputs, compare the outputs below
+    # the normal case, both source and outputs are not empty, compare the outputs below
     # nbformat>=4 support 4 output types: stream, display_data, execute_result, error
     # see also: https://ipython.readthedocs.io/en/3.x/notebook/nbformat.html
     for index, output2 in enumerate(cell2['outputs']):
@@ -52,7 +52,7 @@ def check_cell(cell1, cell2):
 
 def check_cells(cells1, cells2):
     """
-    Check cells of completed student book (cells1) with original ones (cells2)
+    Check cells of completed student book (cells1) with original textbook (cells2)
     Return a list of int numbers, each element contains result of one cell （same order with original textbook）:
         0 - empty, 1 - not empty, 2 - same as original
     """
